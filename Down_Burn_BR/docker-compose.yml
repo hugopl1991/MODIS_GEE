@@ -1,0 +1,36 @@
+# =============================================================================
+# Pipeline Sequencial — Estoque de Queimadas (MODIS)
+# =============================================================================
+# Pipeline planejado em quatro etapas: Down Raster -> Burn Freq -> Queimadas -> Borda.
+# Por enquanto, apenas o serviço "npi_down" está implementado sepadamente o Downlaod.
+#
+# Volumes são definidos via variáveis do arquivo .env (copie _env para .env).
+# O serviço tem restart: "no" — roda uma vez e encerra.
+# =============================================================================
+
+services:
+
+  # ===========================================================================
+  # SERVIÇO: npi_down
+  # Constrói a imagem npi-geo:latest a partir do Dockerfile local e executa
+  # o download dos rasters mensais MODIS MCD64A1 (área queimada) via Earth Engine.
+  # ===========================================================================
+  npi_down:
+    build:
+      context: .              # Dockerfile lido na pasta atual
+      dockerfile: Dockerfile
+    image: npi-geo:latest
+    container_name: npi_down
+    command: python /app/scripts/NPI_Down_v4.py
+
+    volumes:
+      # Dados de entrada e saída (shapefile, rasters baixados, log)
+      - ${DIR_DADOS}:/dados
+      # Scripts do pipeline, montados a partir da pasta local
+      - ./scripts:/app/scripts
+      # Chave de credenciais do Google Earth Engine (somente leitura no container)
+      - ${EE_CREDENTIALS_PATH}:/app/credentials.json:ro
+
+    working_dir: /dados   # Diretório de trabalho — onde config.yaml e o shapefile são lidos
+
+    restart: "no"   # Execução única — não reinicia em caso de falha ou término

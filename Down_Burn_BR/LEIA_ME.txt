@@ -1,0 +1,17 @@
+OTIMIZAÇÃO DO PROCESSO DE DOWNLOAD
+
+Com o objetivo de otimizar a quantidade de arquivos baixados, foi desenvolvida uma nova versão do script NPI_Down_v4.py.
+
+Essa versão permite realizar o download de dados estaduais do MODIS por meio do Google Earth Engine (GEE) sem atingir os limites de download e upload impostos pela API.
+
+Para otimizar o download dos dados brutos mensais de queimadas para todo o Brasil, foi desenvolvida uma segunda versão do script.
+
+A API do Google Earth Engine possui limitações para o tamanho de cada requisição de download e upload. Por esse motivo, para obter os dados de todo o território brasileiro, é necessário dividir o país em blocos e realizar múltiplas requisições para cada raster mensal.
+
+OBSERVAÇÕES
+
+Primeiro script:
+Realiza os downloads de forma mais rápida, pois exporta diretamente o raster da área de interesse.
+Segundo script:
+Cada raster mensal é dividido em vários blocos, exigindo diversas requisições de download.
+Como consequência, o tempo total de processamento é maior, porém essa abordagem permite contornar as limitações da API do Google Earth Engine para grandes áreas.

@@ -1,0 +1,52 @@
+# =============================================================================
+# CONFIGURAÇÕES GLOBAIS
+# Compartilhadas entre os scripts do pipeline (Down -> Burn -> Queimadas -> Borda).
+# =============================================================================
+global:
+  # Shapefile de referência para recorte da região de interesse
+  shp_path: "inputs/Shape_estados/PA_Mapbiomas.shp"   
+
+# =============================================================================
+# SCRIPT DE DOWNLOAD (NPI_Down_v4.py)
+# Baixa do Google Earth Engine os rasters mensais de área queimada (MCD64A1),
+# recortados pela região definida em global.shp_path.
+# As credenciais (key_file) são montadas no container via docker-compose,
+# a partir da variável EE_CREDENTIALS_PATH definida no .env.
+# =============================================================================
+down:
+  # Ano inicial do período de download
+  start_year:  2000                     
+  # Mês inicial do período (1-12)
+  start_month: 1                        
+  # Ano final do período de download
+  end_year:    2024                     
+  # Mês final do período (1-12)
+  end_month:   12                       
+
+  # Pasta de saída dos rasters baixados
+  out_dir:  "Raster/MODIS_BurnDate_RAW" 
+  # Nome do arquivo de log (salvo dentro de out_dir)
+  log_file: "_download_log.json"        
+
+  # Resolução espacial de exportação, em metros
+  scale:       500                      
+  # CRS geográfico WGS84 — padrão dos rasters de saída
+  crs:         "EPSG:4326"              
+  # Pausa entre downloads bem-sucedidos (segundos)
+  pause_sec:   1                        
+  # Número máximo de tentativas por mês em caso de erro
+  max_retries: 3                        
+
+  # Conta de serviço do GEE
+  service_account: "gee-894@modis-500120.iam.gserviceaccount.com"  
+  # Caminho da chave JSON de credenciais dentro do container
+  key_file:        "/app/credentials.json"    
+  # ID do projeto no Google Cloud / Earth Engine
+  project:         "modis-500120"             
+
+  # Prefixo usado para nomear os arquivos gerados
+  nome_raster: "BurnDate"                
+  # Coleção MODIS de área queimada (Burned Area)
+  collection:  "MODIS/061/MCD64A1"       
+  # Tipo selecionado dentro da coleção
+  selection:   "BurnDate"                

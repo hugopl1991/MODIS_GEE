@@ -1,0 +1,6 @@
+# Ignora tudo dentro da pasta
+Raster/
+inputs/
+
+# Outros arquivos
+*.json
