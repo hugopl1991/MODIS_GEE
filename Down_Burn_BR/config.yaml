@@ -11,7 +11,7 @@ down:
   # Mês inicial do período (1-12)
   start_month: 1                        
   # Ano final do período de download
-  end_year:    2024                     
+  end_year:    2025                     
   # Mês final do período (1-12)
   end_month:   12                       
 

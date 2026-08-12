@@ -14,6 +14,9 @@ FROM python:3.13-slim AS base
 # -----------------------------------------------------------------------------
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONIOENCODING=utf-8 \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8 \
     PYTHONUNBUFFERED=1
 
 # -----------------------------------------------------------------------------
