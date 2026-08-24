@@ -10,14 +10,14 @@
 services:
   # ===========================================================================
   # SERVIÇO: npi_down
-  # Constrói a imagem npi-geo:latest a partir do Dockerfile local e executa
+  # Constrói a imagem npi-geo-down:latest a partir do Dockerfile local e executa
   # o download dos rasters mensais MODIS MCD64A1 (área queimada) via Earth Engine.
   # ===========================================================================
   npi_down:
     build:
       context: .              
       dockerfile: Dockerfile
-    image: npi-geo:latest
+    image: npi-geo-down:latest
     container_name: npi_down
     command: python /app/scripts/NPI_Down_v4.py
 
