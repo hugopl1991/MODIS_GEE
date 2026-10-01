@@ -18,7 +18,7 @@ services:
       context: .              
       dockerfile: Dockerfile
     image: npi-geo-down:latest
-    container_name: npi_down
+    container_name: npi_down_br
     command: python /app/scripts/NPI_Down_v4.py
 
     volumes:

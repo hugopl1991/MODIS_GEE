@@ -5,6 +5,7 @@ __pycache__
 *.py[cod]
 *.bak
 .build_hash
+*.json
 
 # Dados e resultados são montados pelo Docker Compose em tempo de execução.
 Raster
