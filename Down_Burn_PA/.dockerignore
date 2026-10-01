@@ -1,0 +1,14 @@
+.git
+.gitignore
+.dockerignore
+__pycache__
+*.py[cod]
+*.bak
+.build_hash
+
+# Dados e resultados são montados pelo Docker Compose em tempo de execução.
+Raster
+
+# Documentação e artefatos que não são executados no container.
+README.md
+docs
